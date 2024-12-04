@@ -14,7 +14,7 @@ class ListWidgetsHomeScreen extends StatelessWidget {
           width: double.infinity,
           child: ListView.builder(
               itemCount: 60,
-              itemBuilder: ((BuildContext context, index) => Container(
+              itemBuilder: ((BuildContext context, index) => SizedBox(
                   width: 335,
                   height: 113,
                   child:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../constants/constant.dart';
 
 class BoardHomeScreen extends StatelessWidget {
@@ -43,12 +44,14 @@ class BoardHomeScreen extends StatelessWidget {
                       ),
                     ),
                     const Expanded(child: SizedBox()),
-                    const SizedBox(
-                        width: 24, height: 24, child: Icon(Icons.add)),
-                    const SizedBox(
-                        width: 24, height: 24, child: Icon(Icons.add)),
-                    const SizedBox(
-                        width: 24, height: 24, child: Icon(Icons.add))
+                    SvgPicture.asset('assets/icons/happy.svg',
+                        height: 24, width: 24),
+                    const SizedBox(width: 16),
+                    SvgPicture.asset('assets/icons/day.svg',
+                        height: 24, width: 24),
+                    const SizedBox(width: 16),
+                    SvgPicture.asset('assets/icons/pill.svg',
+                        height: 24, width: 24),
                   ],
                 ),
               ),
