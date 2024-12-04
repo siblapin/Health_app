@@ -13,6 +13,7 @@ class Health_app extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: 'Дневник давления',
         theme: ThemeData(fontFamily: "Manrope"),
         debugShowCheckedModeBanner: false,
         home: Scaffold(backgroundColor: bg, body: const HomeScreen()));

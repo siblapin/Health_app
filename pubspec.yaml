@@ -85,7 +85,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 icons_launcher:
-  image_path: "assets/icons/Group1.png"
+  image_path: "assets/icons/logo_icon.png"
   platforms:
     android:
       enable: true
