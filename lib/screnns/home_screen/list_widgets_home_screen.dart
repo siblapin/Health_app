@@ -75,7 +75,7 @@ class WidgetsHomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(),
+              const Divider(),
               SizedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -62,60 +62,65 @@ class BoardHomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "СИС",
-                          style: TextStyle(fontSize: 12, color: text_color2),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text("120 мм рт.ст",
-                            style: TextStyle(fontSize: 14))
-                      ],
+                    SisDisPuls(
+                      textTitle: "СИС",
+                      inputText: '120',
+                      widthBox: 90,
+                      text: 'мм рт.ст',
                     ),
-                    SizedBox(
-                      width: 83,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "ДИС",
-                            style: TextStyle(fontSize: 12, color: text_color2),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text("80 мм рт.ст",
-                              style: TextStyle(fontSize: 14))
-                        ],
-                      ),
+                    SisDisPuls(
+                      textTitle: "ДИС",
+                      inputText: '80',
+                      widthBox: 90,
+                      text: 'мм рт.ст',
                     ),
-                    SizedBox(
-                      width: 81,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "ПУЛЬС",
-                            style: TextStyle(fontSize: 12, color: text_color2),
-                          ),
-                          const SizedBox(height: 4),
-                          const SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              "80 у/мин",
-                              style: TextStyle(fontSize: 14),
-                              textAlign: TextAlign.left,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                    SisDisPuls(
+                      textTitle: "ПУЛЬС",
+                      inputText: '80',
+                      widthBox: 88,
+                      text: 'у/мин',
+                    ),
                   ],
                 ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+//MODEL: показатели СИС ДИД и Пульс
+class SisDisPuls extends StatelessWidget {
+  SisDisPuls(
+      {super.key,
+      required this.textTitle,
+      required this.text,
+      required this.inputText,
+      required this.widthBox});
+  String textTitle;
+  String text;
+  String inputText;
+  double widthBox;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widthBox,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            textTitle,
+            style: TextStyle(fontSize: 12, color: text_color2),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            "$inputText $text",
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 14),
+          )
+        ],
       ),
     );
   }
