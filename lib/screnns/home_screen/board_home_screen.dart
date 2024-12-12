@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../constants/constant.dart';
+import '../../constants/date_time_app.dart';
+import '../../models/result_card/sis_dis_puls.mosel.dart';
 
 class BoardHomeScreen extends StatelessWidget {
   const BoardHomeScreen({
@@ -10,7 +12,7 @@ class BoardHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 335,
+      width: double.infinity,
       height: 155,
       child: Card(
         color: mint,
@@ -33,15 +35,7 @@ class BoardHomeScreen extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 81,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Среда",
-                              style: TextStyle(fontSize: 10, color: color_100)),
-                          const Text("01.11.2024",
-                              style: TextStyle(fontSize: 14))
-                        ],
-                      ),
+                      child: DateTimeApp(),
                     ),
                     const Expanded(child: SizedBox()),
                     SvgPicture.asset('assets/icons/happy.svg',
@@ -56,7 +50,7 @@ class BoardHomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              SizedBox(
+              const SizedBox(
                 height: 42,
                 width: double.infinity,
                 child: Row(
@@ -77,7 +71,7 @@ class BoardHomeScreen extends StatelessWidget {
                     SisDisPuls(
                       textTitle: "ПУЛЬС",
                       inputText: '80',
-                      widthBox: 88,
+                      widthBox: 90,
                       text: 'у/мин',
                     ),
                   ],
@@ -86,41 +80,6 @@ class BoardHomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-//MODEL: показатели СИС ДИД и Пульс
-class SisDisPuls extends StatelessWidget {
-  SisDisPuls(
-      {super.key,
-      required this.textTitle,
-      required this.text,
-      required this.inputText,
-      required this.widthBox});
-  String textTitle;
-  String text;
-  String inputText;
-  double widthBox;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: widthBox,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            textTitle,
-            style: TextStyle(fontSize: 12, color: text_color2),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "$inputText $text",
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 14),
-          )
-        ],
       ),
     );
   }

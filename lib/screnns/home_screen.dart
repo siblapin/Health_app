@@ -12,8 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: const EdgeInsets.only(top: 47),
-        width: 335,
+        margin: const EdgeInsets.only(top: 50, left: 30, right: 30),
         child: const Column(
           children: [
             LogoHomeScreen(),
