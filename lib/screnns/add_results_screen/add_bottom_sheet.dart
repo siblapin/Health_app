@@ -5,7 +5,6 @@ import 'package:health_app/screnns/add_results_screen/hand.dart';
 import 'package:health_app/screnns/add_results_screen/health_condition.dart';
 import 'package:health_app/screnns/add_results_screen/medicine.dart';
 import 'package:health_app/screnns/add_results_screen/times_of_day.dart';
-import 'package:health_app/screnns/home_screen/button_add_home_screen.dart';
 
 class AddBottomSheet extends StatelessWidget {
   const AddBottomSheet({super.key});
@@ -29,7 +28,7 @@ class AddBottomSheet extends StatelessWidget {
                     style: TextStyle(color: color_100, fontSize: 20)),
               ),
               const InputOfIndicators(),
-              const HealthCondition(),
+              HealthCondition(),
               const TimesOfDay(),
               const Hand(),
               const Medicine(),

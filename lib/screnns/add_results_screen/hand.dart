@@ -1,6 +1,7 @@
-//Блок время суток
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+//Блок выбора руки измерения давления
 
 class Hand extends StatelessWidget {
   const Hand({
