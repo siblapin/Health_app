@@ -43,7 +43,7 @@ class InputOfIndicators extends StatelessWidget {
             const SizedBox(width: 32),
             Column(
               children: [
-                Text("Пульс",
+                Text("ПУЛЬС",
                     style: TextStyle(fontSize: 14, color: text_color2)),
                 Text("у/мин", style: TextStyle(fontSize: 12, color: color_40)),
               ],

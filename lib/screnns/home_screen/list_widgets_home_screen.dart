@@ -14,7 +14,7 @@ class ListWidgetsHomeScreen extends StatelessWidget {
           child: ListView.builder(
               itemCount: 60,
               itemBuilder: ((BuildContext context, index) =>
-                  ResultCardModel()))),
+                  const ResultCardModel()))),
     );
   }
 }

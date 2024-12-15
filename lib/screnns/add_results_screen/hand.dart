@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:health_app/Providers%20%20/add_results_provider.dart';
+import 'package:health_app/constants/constant.dart';
+import 'package:provider/provider.dart';
 
 //Блок выбора руки измерения давления
 
@@ -21,21 +24,38 @@ class Hand extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: SvgPicture.asset('assets/icons/ion_hand-right.svg',
-                height: 24, width: 24),
-          ),
+          HandBottom(hand: handLeft, nohand: nohandLeft, indicator: 1),
           const SizedBox(width: 16),
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: SvgPicture.asset('assets/icons/ion_hand-right.svg',
-                height: 24, width: 24),
-          ),
+          HandBottom(hand: handRight, nohand: nohandRight, indicator: 2),
         ],
       )
     ]);
+  }
+}
+
+class HandBottom extends StatelessWidget {
+  const HandBottom(
+      {super.key,
+      required this.hand,
+      required this.nohand,
+      required this.indicator});
+  final int indicator;
+  final String hand;
+  final String nohand;
+  @override
+  Widget build(BuildContext context) {
+    final handBotton = context.watch<AddResultsProvider>();
+    return GestureDetector(
+      onTap: () {
+        handBotton.handBottonFunc(indicator);
+      },
+      child: SizedBox(
+        width: 48,
+        height: 48,
+        child: (handBotton.handBotton == indicator)
+            ? SvgPicture.asset(handLeft, height: 24, width: 24)
+            : SvgPicture.asset(nohandLeft, height: 24, width: 24),
+      ),
+    );
   }
 }

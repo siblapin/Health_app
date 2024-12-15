@@ -28,7 +28,7 @@ class AddBottomSheet extends StatelessWidget {
                     style: TextStyle(color: color_100, fontSize: 20)),
               ),
               const InputOfIndicators(),
-              HealthCondition(),
+              const HealthCondition(),
               const TimesOfDay(),
               const Hand(),
               const Medicine(),
