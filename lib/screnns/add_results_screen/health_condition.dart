@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:health_app/constants/constant.dart';
-import 'package:health_app/main.dart';
 import 'package:provider/provider.dart';
 
 import '../../Providers  /add_results_provider.dart';
