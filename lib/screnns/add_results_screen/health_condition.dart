@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:health_app/constants/constant.dart';
 import 'package:provider/provider.dart';
-
-import '../../Providers  /add_results_provider.dart';
+import '../../providers  /add_results_provider.dart';
 
 //Блок выбора самочувствия "Плохо - Недомагание - Хорошо - Отлично"
 
@@ -23,10 +22,20 @@ class HealthCondition extends StatelessWidget {
           )),
       const SizedBox(height: 12),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        SmBotton(icon: bad, textStatus: 'Плохо', indefecator: 1),
-        SmBotton(icon: depression, textStatus: 'Недомагание', indefecator: 2),
-        SmBotton(icon: good, textStatus: 'Хорошо', indefecator: 3),
-        SmBotton(icon: happy, textStatus: 'Отлично', indefecator: 4),
+        Flexible(
+            flex: 1,
+            child: SmBotton(icon: bad, textStatus: 'Плохо', indefecator: 1)),
+        Flexible(
+            flex: 2,
+            child: SmBotton(
+                icon: depression, textStatus: 'Недомагание', indefecator: 2)),
+        Flexible(
+            flex: 1,
+            child: SmBotton(icon: good, textStatus: 'Хорошо', indefecator: 3)),
+        Flexible(
+            flex: 1,
+            child:
+                SmBotton(icon: happy, textStatus: 'Отлично', indefecator: 4)),
       ])
     ]);
   }
@@ -52,7 +61,6 @@ class SmBotton extends StatelessWidget {
         smiley.smileyIntFunc(indefecator);
       },
       child: SizedBox(
-        width: 85,
         height: 50,
         child: Column(
           children: [

@@ -13,7 +13,6 @@ class BoardHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 155,
       child: Card(
         color: mint,
         child: Padding(
@@ -51,7 +50,7 @@ class BoardHomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               const SizedBox(
-                height: 42,
+                height: 45,
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +70,7 @@ class BoardHomeScreen extends StatelessWidget {
                     SisDisPuls(
                       textTitle: "ПУЛЬС",
                       inputText: '80',
-                      widthBox: 90,
+                      widthBox: 80,
                       text: 'у/мин',
                     ),
                   ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:health_app/constants/constant.dart';
 import 'package:provider/provider.dart';
-import '../../Providers  /add_results_provider.dart';
+import '../../providers  /add_results_provider.dart';
 
 class TimesOfDay extends StatelessWidget {
   const TimesOfDay({

@@ -4,17 +4,39 @@ import 'package:health_app/constants/constant.dart';
 import '../../constants/date_time_app.dart';
 import 'sis_dis_puls.mosel.dart';
 
+class DataResultCardModel {
+  String sis;
+  String dis;
+  String puls;
+  String iconStatus;
+  String iconDay;
+  String medicine;
+  DataResultCardModel(
+      {required this.sis,
+      required this.dis,
+      required this.puls,
+      required this.iconStatus,
+      required this.iconDay,
+      required this.medicine});
+}
+
 class ResultCardModel extends StatelessWidget {
   const ResultCardModel({
     super.key,
+    required this.sis,
+    required this.smail,
+    required this.timesOfday,
+    required this.pills,
+    required this.dis,
+    required this.puls,
   });
 
-  final String smail = 'assets/icons/happy.svg';
-  final String timesOfday = 'assets/icons/day.svg';
-  final String pills = 'assets/icons/pill.svg';
-  final int sis = 90;
-  final int dis = 90;
-  final int puls = 90;
+  final String smail;
+  final String timesOfday;
+  final String pills;
+  final String sis;
+  final String dis;
+  final String puls;
   @override
   Widget build(BuildContext context) {
     return Padding(

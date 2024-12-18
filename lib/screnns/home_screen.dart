@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/Providers%20%20/add_results_provider.dart';
+import 'package:health_app/providers%20%20/add_results_provider.dart';
 import 'package:health_app/screnns/home_screen/logo_home_screen.dart';
 import 'package:provider/provider.dart';
 import 'home_screen/board_home_screen.dart';
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            TittleListHomeScreen(),
+            const TittleListHomeScreen(),
             const SizedBox(height: 16),
             const ListWidgetsHomeScreen()
           ],

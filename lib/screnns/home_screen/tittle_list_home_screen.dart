@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/Providers%20%20/add_results_provider.dart';
+import 'package:health_app/providers%20%20/add_results_provider.dart';
 import 'package:provider/provider.dart';
 import '../../constants/constant.dart';
 
@@ -11,7 +11,7 @@ class TittleListHomeScreen extends StatelessWidget {
   final String text2 = "Назад";
   @override
   Widget build(BuildContext context) {
-    final screenList = context.read<AddResultsProvider>();
+    final screenList = context.watch<AddResultsProvider>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
