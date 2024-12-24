@@ -21,10 +21,8 @@ class TittleListHomeScreen extends StatelessWidget {
           onTap: () {
             screenList.screenListFunc();
           },
-          child: SizedBox(
-              height: 20,
-              child: Text((screenList.screenList == true) ? text1 : text2,
-                  style: TextStyle(fontSize: 14, color: color_100))),
+          child: Text((screenList.screenList == true) ? text1 : text2,
+              style: TextStyle(fontSize: 14, color: color_100)),
         ),
       ],
     );

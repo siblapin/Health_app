@@ -1,21 +1,27 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:health_app/constants/constant.dart';
 
 class AddResultsProvider extends ChangeNotifier {
-  int smileyInt = 0; // индикатор иконок смайликов самочувствия
   String smileyText = '';
   String dayText = '';
-  int dayInt = 0; // индикатор иконок время суток
-  bool tabBotton = false; // переменная кнопки добавить лекарства
-  int handBotton = 0; // переменная кнопки активировать руку измерения пульса
-  bool screenList = true;
-  String smiley = '';
-  bool truefalse = false;
+  String pill = '';
 
+  int smileyInt = 0; // индикатор иконок смайликов самочувствия
+  int dayInt = 0; // индикатор иконок время суток
+  int handBotton = 0; // переменная кнопки активировать руку измерения пульса
+
+  bool tabBotton = false; // переменная кнопки добавить лекарства
+  bool screenList = true; // переменная скрыть/раскрыть лист
+
+// сбрасыввет выбраные настроки в "add_resuls_screen"
   Future<void> updateDate() async {
     smileyInt = 0;
     dayInt = 0;
     handBotton = 0;
+    smileyText = '';
+    dayText = '';
+    pill = '';
     notifyListeners();
   }
 
@@ -30,7 +36,6 @@ class AddResultsProvider extends ChangeNotifier {
     } else if (a == 4) {
       smileyText = happy;
     }
-
     smileyInt = a;
     notifyListeners();
   }
@@ -58,13 +63,15 @@ class AddResultsProvider extends ChangeNotifier {
   Future<void> tabBottonFunc() async {
     if (tabBotton == true) {
       tabBotton = false;
+      pill = "";
     } else {
       tabBotton = true;
+      pill = "assets/icons/pill.svg";
     }
     notifyListeners();
   }
 
-// функция скрыть/разкрыть лист
+// функция скрыть/раскрыть лист
   Future<void> screenListFunc() async {
     if (screenList == true) {
       screenList = false;

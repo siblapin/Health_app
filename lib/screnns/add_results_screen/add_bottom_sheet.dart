@@ -11,6 +11,8 @@ import 'package:health_app/screnns/add_results_screen/medicine.dart';
 import 'package:health_app/screnns/add_results_screen/times_of_day.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers  /board_home_provider.dart';
+
 class AddBottomSheet extends StatelessWidget {
   const AddBottomSheet({super.key});
 
@@ -53,8 +55,10 @@ class ButtonAddResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = context.watch<AddResultsProvider>();
+    final data = context.read<AddResultsProvider>();
     final dataTextProvider = context.read<TextDataProvider>();
+    final dataBardProvider = context.read<BoardHomeProvider>();
+
     return SizedBox(
       width: double.infinity,
       height: 48,
@@ -62,21 +66,26 @@ class ButtonAddResult extends StatelessWidget {
         style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color_100)),
         onPressed: () {
           // добавление класс в лист виджетов
-          ResultCard.add(DataResultCardModel(
-              iconStatus: data.smileyText,
-              iconDay: data.dayText,
-              medicine: '',
-              sis: dataTextProvider.textSisData.text,
-              dis: dataTextProvider.textDisData.text,
-              puls: dataTextProvider.textPulsData.text));
+          resultCard.add(DataResultCardModel(
+            iconStatus: data.smileyText,
+            iconDay: data.dayText,
+            iconMedicine: data.pill,
+            medicine: dataTextProvider.textDataMedicine.text,
+            sis: dataTextProvider.textSisData.text,
+            dis: dataTextProvider.textDisData.text,
+            puls: dataTextProvider.textPulsData.text,
+          ));
 
-          // вернуться назад
-          Navigator.pop(context);
           dataTextProvider.textDisData.clear();
           dataTextProvider.textSisData.clear();
           dataTextProvider.textPulsData.clear();
+          dataTextProvider.textDataMedicine.clear();
           // обновление
           data.updateDate();
+          data.tabBotton = false;
+          dataBardProvider.boardHomeFunc();
+          // вернуться назад
+          Navigator.pop(context);
         },
         icon: Icon(Icons.add_circle, color: bg),
         label: Text(

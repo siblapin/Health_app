@@ -68,8 +68,8 @@ class SmBotton extends StatelessWidget {
             (smiley.smileyInt == indefecator)
                 ? SvgPicture.asset(
                     icon,
-                    height: 24,
-                    width: 24,
+                    height: 26,
+                    width: 26,
                   )
                 : SvgPicture.asset(
                     icon,
@@ -82,8 +82,8 @@ class SmBotton extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 12,
                     color: (smiley.smileyInt == indefecator)
-                        ? Colors.black
-                        : Colors.grey))
+                        ? color_100
+                        : color_40))
           ],
         ),
       ),

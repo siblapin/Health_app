@@ -53,8 +53,8 @@ class HandBottom extends StatelessWidget {
         width: 48,
         height: 48,
         child: (handBotton.handBotton == indicator)
-            ? SvgPicture.asset(handLeft, height: 24, width: 24)
-            : SvgPicture.asset(nohandLeft, height: 24, width: 24),
+            ? SvgPicture.asset(hand, height: 24, width: 24)
+            : SvgPicture.asset(nohand, height: 24, width: 24),
       ),
     );
   }

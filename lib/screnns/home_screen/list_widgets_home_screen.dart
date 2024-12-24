@@ -17,15 +17,20 @@ class ListWidgetsHomeScreen extends StatelessWidget {
       child: SizedBox(
           width: double.infinity,
           child: ListView.builder(
-              itemCount: ResultCard.length,
-              itemBuilder: ((BuildContext context, index) => ResultCardModel(
-                    smail: ResultCard[index].iconStatus,
-                    timesOfday: ResultCard[index].iconDay,
-                    pills: '',
-                    sis: ResultCard[index].sis,
-                    dis: ResultCard[index].dis,
-                    puls: ResultCard[index].puls,
-                  )))),
+            itemCount: resultCard.length,
+            itemBuilder: ((BuildContext context, index) {
+              index = resultCard.length - 1 - index;
+              return ResultCardModel(
+                smail: resultCard[index].iconStatus,
+                timesOfday: resultCard[index].iconDay,
+                pills: resultCard[index].iconMedicine,
+                sis: resultCard[index].sis,
+                dis: resultCard[index].dis,
+                puls: resultCard[index].puls,
+                medicine: resultCard[index].medicine,
+              );
+            }),
+          )),
     );
   }
 }

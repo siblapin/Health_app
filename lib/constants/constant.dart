@@ -26,3 +26,9 @@ String nohandLeft = 'assets/icons/no_hand_left.svg'; // не активная л
 String handRight = 'assets/icons/ion_hand-right.svg'; //правая рука
 String nohandRight = 'assets/icons/no_hand_right.svg'; //не активная правая рука
 
+// Icons
+String basket = 'assets/icons/icon24.svg'; // корзина
+String editing = 'assets/icons/vector.svg'; //
+String masseng = 'assets/icons/vectorMasseng.svg'; // Вечер
+
+String pill = 'assets/icons/pill.svg';

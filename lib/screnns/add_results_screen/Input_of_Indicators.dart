@@ -20,7 +20,8 @@ class InputOfIndicators extends StatelessWidget {
       decoration: BoxDecoration(
           color: bg, borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
-        padding: const EdgeInsets.only(right: 20, left: 20, top: 16),
+        padding:
+            const EdgeInsets.only(right: 20, left: 20, top: 16, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -29,7 +30,8 @@ class InputOfIndicators extends StatelessWidget {
                 Text("ДИС", style: TextStyle(fontSize: 14, color: text_color2)),
                 Text("мм рт. ст.",
                     style: TextStyle(fontSize: 12, color: color_40)),
-                SizedBox(
+                Container(
+                    margin: const EdgeInsets.only(top: 4),
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textSisData,
@@ -42,7 +44,8 @@ class InputOfIndicators extends StatelessWidget {
                 Text("CИС", style: TextStyle(fontSize: 14, color: text_color2)),
                 Text("мм рт. ст.",
                     style: TextStyle(fontSize: 12, color: color_40)),
-                SizedBox(
+                Container(
+                    margin: const EdgeInsets.only(top: 4),
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textDisData,
@@ -54,8 +57,9 @@ class InputOfIndicators extends StatelessWidget {
               children: [
                 Text("ПУЛЬС",
                     style: TextStyle(fontSize: 14, color: text_color2)),
-                Text("у/мин", style: TextStyle(fontSize: 12, color: color_40)),
-                SizedBox(
+                Text("уд/мин", style: TextStyle(fontSize: 12, color: color_40)),
+                Container(
+                    margin: const EdgeInsets.only(top: 4),
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textPulsData,
@@ -78,17 +82,27 @@ class TextData extends StatelessWidget {
     return TextField(
       inputFormatters: [LengthLimitingTextInputFormatter(3)],
       keyboardType: TextInputType.number,
+      cursorColor: color_100,
       onChanged: (text) {
         if (text.length == 3) {
           textnext.nextFocus();
         }
       },
       controller: textData,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: color_40, width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: color_100, width: 1.5),
+        ),
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
       ),
     );
   }
