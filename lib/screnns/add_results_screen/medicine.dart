@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:health_app/providers%20%20/add_results_provider.dart';
 import 'package:health_app/constants/constant.dart';
@@ -72,6 +73,7 @@ class TextMedicine extends StatelessWidget {
   Widget build(BuildContext context) {
     TextDataProvider textData = context.read<TextDataProvider>();
     return TextField(
+      inputFormatters: [LengthLimitingTextInputFormatter(20)],
       scrollPadding: const EdgeInsets.all(20),
       cursorColor: color_100,
       controller: textData.textDataMedicine,

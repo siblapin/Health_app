@@ -11,36 +11,43 @@ import 'package:health_app/screnns/add_results_screen/medicine.dart';
 import 'package:health_app/screnns/add_results_screen/times_of_day.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers  /board_home_provider.dart';
-
 class AddBottomSheet extends StatelessWidget {
   const AddBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 41),
-      child: Container(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 26, right: 26),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 36),
-                child: Text("Новое измерение",
-                    style: TextStyle(color: color_100, fontSize: 20)),
-              ),
-              const InputOfIndicators(),
-              const HealthCondition(),
-              const TimesOfDay(),
-              const Hand(),
-              const Medicine(),
-              const ButtonAddResult(),
-            ],
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 41),
+        child: Container(
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 26, right: 26),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 36),
+                  child: Text("Новое измерение",
+                      style: TextStyle(color: color_100, fontSize: 20)),
+                ),
+                const InputOfIndicators(),
+                Expanded(
+                  child: ListView(
+                    children: const [
+                      HealthCondition(),
+                      TimesOfDay(),
+                      Hand(),
+                      Medicine(),
+                      ButtonAddResult(),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -57,7 +64,7 @@ class ButtonAddResult extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = context.read<AddResultsProvider>();
     final dataTextProvider = context.read<TextDataProvider>();
-    final dataBardProvider = context.read<BoardHomeProvider>();
+    final databaseProvider = context.read<DatabaseProvider>();
 
     return SizedBox(
       width: double.infinity,
@@ -65,15 +72,15 @@ class ButtonAddResult extends StatelessWidget {
       child: ElevatedButton.icon(
         style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color_100)),
         onPressed: () {
-          // добавление класс в лист виджетов
-          resultCard.add(DataResultCardModel(
-            iconStatus: data.smileyText,
-            iconDay: data.dayText,
-            iconMedicine: data.pill,
-            medicine: dataTextProvider.textDataMedicine.text,
+          databaseProvider.addCardHealthBox(DataResultCardModel(
             sis: dataTextProvider.textSisData.text,
             dis: dataTextProvider.textDisData.text,
             puls: dataTextProvider.textPulsData.text,
+            iconStatus: data.smileyText,
+            iconDay: data.dayText,
+            medicineText: dataTextProvider.textDataMedicine.text,
+            date: DateTime.now(),
+            hand: data.iconsHand,
           ));
 
           dataTextProvider.textDisData.clear();
@@ -83,8 +90,9 @@ class ButtonAddResult extends StatelessWidget {
           // обновление
           data.updateDate();
           data.tabBotton = false;
-          dataBardProvider.boardHomeFunc();
+
           // вернуться назад
+
           Navigator.pop(context);
         },
         icon: Icon(Icons.add_circle, color: bg),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants/constant.dart';
 
 class LogoHomeScreen extends StatelessWidget {
@@ -28,9 +27,12 @@ class LogoHomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: 24,
-            child: Icon(Icons.settings, color: color_100),
+          Visibility(
+            visible: false,
+            child: SizedBox(
+              width: 24,
+              child: Icon(Icons.settings, color: color_100),
+            ),
           )
         ],
       ),

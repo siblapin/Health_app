@@ -19,11 +19,15 @@ class SisDisPuls extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(textTitle, style: TextStyle(fontSize: 14, color: text_color2)),
+          Text(textTitle,
+              style: TextStyle(fontSize: 14, color: text_color2),
+              overflow: TextOverflow.ellipsis),
           Text(inputText,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 22, color: text_color)),
-          Text(text, style: TextStyle(fontSize: 12, color: color_40)),
+          Text(text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 12, color: color_40)),
         ],
       ),
     );

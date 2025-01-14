@@ -5,7 +5,8 @@ import 'package:health_app/constants/constant.dart';
 class AddResultsProvider extends ChangeNotifier {
   String smileyText = '';
   String dayText = '';
-  String pill = '';
+  String iconsHand = '';
+  String iconsMedicine = pill;
 
   int smileyInt = 0; // индикатор иконок смайликов самочувствия
   int dayInt = 0; // индикатор иконок время суток
@@ -21,41 +22,67 @@ class AddResultsProvider extends ChangeNotifier {
     handBotton = 0;
     smileyText = '';
     dayText = '';
-    pill = '';
+    iconsHand = '';
+    iconsMedicine = '';
     notifyListeners();
   }
 
 // функция иконок смайликов самочувствия
   Future<void> smileyIntFunc(int a) async {
-    if (a == 1) {
-      smileyText = bad;
-    } else if (a == 2) {
-      smileyText = depression;
-    } else if (a == 3) {
-      smileyText = good;
-    } else if (a == 4) {
-      smileyText = happy;
+    switch (a) {
+      case 1:
+        smileyText = bad;
+        break;
+      case 2:
+        smileyText = depression;
+        break;
+      case 3:
+        smileyText = good;
+        break;
+      case 4:
+        smileyText = happy;
+        break;
     }
     smileyInt = a;
     notifyListeners();
   }
 
-// функция иконок время суток
-  Future<void> timesOfdayIntFunc(int a) async {
-    if (a == 1) {
-      dayText = morning;
-    } else if (a == 2) {
-      dayText = day;
-    } else if (a == 3) {
-      dayText = night;
+  // функция иконок смайликов самочувствия
+  Future<void> indicatorHandIcon() async {
+    switch (handBotton) {
+      case 2:
+        iconsHand = handRight;
+        break;
+      case 1:
+        iconsHand = handLeft;
+        break;
+      default:
+        iconsHand = '';
     }
-    dayInt = a;
+    notifyListeners();
+  }
+
+// функция иконок время суток
+  Future<void> timesOfdayIntFunc(int c) async {
+    switch (c) {
+      case 1:
+        dayText = morning;
+        break;
+      case 2:
+        dayText = day;
+        break;
+      case 3:
+        dayText = night;
+        break;
+    }
+
+    dayInt = c;
     notifyListeners();
   }
 
   // функция выбора руки
-  Future<void> handBottonFunc(int a) async {
-    handBotton = a;
+  Future<void> handBottonFunc(int x) async {
+    handBotton = x;
     notifyListeners();
   }
 
@@ -63,10 +90,8 @@ class AddResultsProvider extends ChangeNotifier {
   Future<void> tabBottonFunc() async {
     if (tabBotton == true) {
       tabBotton = false;
-      pill = "";
     } else {
       tabBotton = true;
-      pill = "assets/icons/pill.svg";
     }
     notifyListeners();
   }

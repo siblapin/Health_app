@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:health_app/constants/constant.dart';
-import '../../constants/date_time_app.dart';
+import 'package:provider/provider.dart';
+import '../../data/data.dart';
 import 'sis_dis_puls.mosel.dart';
 
 //Класс с переменными
@@ -11,8 +12,10 @@ class DataResultCardModel {
   String puls; // Пульс показатель из TextField
   String iconStatus; // адрес Иконки самочувствия
   String iconDay; // адрес иконки день самочувствия
-  String iconMedicine; // адрес иконки таблетки
-  String medicine;
+  String medicineText; // название лекарств
+
+  DateTime date;
+  String hand;
 
   DataResultCardModel({
     required this.sis,
@@ -20,8 +23,9 @@ class DataResultCardModel {
     required this.puls,
     required this.iconStatus,
     required this.iconDay,
-    required this.iconMedicine,
-    required this.medicine,
+    required this.medicineText,
+    required this.date,
+    required this.hand,
   });
 }
 
@@ -31,20 +35,25 @@ class ResultCardModel extends StatefulWidget {
     super.key,
     required this.sis,
     required this.smail,
-    required this.timesOfday,
-    required this.pills,
+    required this.iconDay,
     required this.dis,
     required this.puls,
-    required this.medicine,
+    required this.medicineText,
+    required this.date,
+    required this.index,
+    required this.hand,
   });
 
   final String smail; // Иконка самочувствия
-  final String timesOfday; // Иконка время суток
-  final String pills;
+  final String iconDay; // Иконка время суток
   final String sis; // СИС показатель из TextField
   final String dis; // Дис показатель из TextField
   final String puls; // Пульс показатель из TextField
-  final String medicine; // текст из TextField название лекарств
+  final String medicineText;
+
+  final String date;
+  final String hand; // Иконка руки
+  final int index;
 
   @override
   State<ResultCardModel> createState() => _ResultCardModelState();
@@ -52,8 +61,11 @@ class ResultCardModel extends StatefulWidget {
 
 class _ResultCardModelState extends State<ResultCardModel> {
   bool onOff = false;
+
   @override
   Widget build(BuildContext context) {
+    final deletCard = context.read<DatabaseProvider>();
+
     return Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.only(left: 16, top: 15, right: 16, bottom: 5),
@@ -63,34 +75,37 @@ class _ResultCardModelState extends State<ResultCardModel> {
         child: Column(
           children: [
             SizedBox(
-              height: 37,
-              width: 303,
+              height: 28,
+              width: double.infinity,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 2, left: 4, right: 4),
-                    decoration: BoxDecoration(
+                      padding: const EdgeInsets.only(top: 2, left: 4, right: 4),
+                      decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(4)),
-                        color: mint),
-                    child: DateTimeApp(),
-                  ),
-                  const SizedBox(width: 16),
+                        color: widget.smail == 'assets/icons/bad.svg'
+                            ? const Color.fromARGB(255, 255, 229, 227)
+                            : widget.smail == 'assets/icons/depression.svg'
+                                ? const Color.fromARGB(255, 255, 229, 227)
+                                : mint,
+                      ),
+                      child: Text(widget.date)),
+                  const Expanded(child: SizedBox()),
                   SvgPicture.asset(widget.smail, height: 24, width: 24),
-                  const SizedBox(width: 16),
-                  SvgPicture.asset(widget.timesOfday, height: 24, width: 24),
-                  const SizedBox(width: 16),
-                  SvgPicture.asset(widget.pills, height: 24, width: 24),
+                  const Expanded(child: SizedBox()),
+                  SvgPicture.asset(widget.iconDay, height: 24, width: 24),
+                  const Expanded(child: SizedBox()),
+                  SvgPicture.asset(widget.hand, height: 24, width: 24),
+                  const Expanded(child: SizedBox()),
+                  SvgPicture.asset((widget.medicineText.isNotEmpty) ? pill : '',
+                      height: 24, width: 24),
                   const Expanded(child: SizedBox()),
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        if (onOff == false) {
-                          onOff = true;
-                        } else if (onOff == true) {
-                          onOff = false;
-                        }
+                        (onOff == false) ? onOff = true : onOff = false;
                       });
                     },
                     child: (onOff)
@@ -146,34 +161,64 @@ class _ResultCardModelState extends State<ResultCardModel> {
                           textAlign: TextAlign.left,
                         )),
                     const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        SvgPicture.asset(pill, height: 20, width: 20),
-                        const SizedBox(width: 10),
-                        SizedBox(
-                            height: 20,
-                            child: (widget.medicine.isNotEmpty)
-                                ? Text(widget.medicine)
-                                : Text(
-                                    'не указано',
-                                    style: TextStyle(
-                                        fontSize: 12, color: color_40),
-                                  )),
-                      ],
-                    ),
+                    Row(children: [
+                      SvgPicture.asset(pill, height: 20, width: 20),
+                      const SizedBox(width: 10),
+                      SizedBox(
+                          height: 20,
+                          child: (widget.medicineText.isNotEmpty)
+                              ? Text(widget.medicineText,
+                                  overflow: TextOverflow.ellipsis)
+                              : Text(
+                                  'не указано',
+                                  style:
+                                      TextStyle(fontSize: 12, color: color_40),
+                                ))
+                    ]),
+// рука для измерения пульса
+                    SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Рука",
+                          style: TextStyle(fontSize: 16, color: color_100),
+                          textAlign: TextAlign.left,
+                        )),
+                    const SizedBox(height: 10),
+                    Row(children: [
+                      SizedBox(
+                          child: SvgPicture.asset(widget.hand,
+                              height: 24, width: 24)),
+                      const SizedBox(width: 10),
+                      (widget.hand == handLeft)
+                          ? const SizedBox(child: Text("Левая"))
+                          : (widget.hand == handRight)
+                              ? const SizedBox(child: Text("Правая"))
+                              : SizedBox(
+                                  child: Text("Рука для измерения не выбрана",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 12, color: color_40)))
+                    ]),
+                    //конец
+
                     Padding(
-                        padding: const EdgeInsets.only(top: 25, bottom: 5),
+                        padding: const EdgeInsets.only(top: 25, bottom: 10),
                         child: SizedBox(
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      deletCard.delCardHealth(widget.index);
+                                    },
                                     child: SvgPicture.asset(basket,
                                         height: 24, width: 24)),
-                                SvgPicture.asset(editing,
-                                    height: 24, width: 24),
+                                Visibility(
+                                  visible: false,
+                                  child: SvgPicture.asset(editing,
+                                      height: 24, width: 24),
+                                ),
                               ],
                             )))
                   ],

@@ -63,7 +63,7 @@ class InputOfIndicators extends StatelessWidget {
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textPulsData,
-                    ))
+                    )),
               ],
             ),
           ],

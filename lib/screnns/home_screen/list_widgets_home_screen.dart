@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:health_app/providers%20%20/add_results_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:health_app/data/data.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../models/result_card/result_card_model.dart';
 
@@ -11,26 +11,41 @@ class ListWidgetsHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<AddResultsProvider>();
-
     return Expanded(
       child: SizedBox(
           width: double.infinity,
-          child: ListView.builder(
-            itemCount: resultCard.length,
-            itemBuilder: ((BuildContext context, index) {
-              index = resultCard.length - 1 - index;
-              return ResultCardModel(
-                smail: resultCard[index].iconStatus,
-                timesOfday: resultCard[index].iconDay,
-                pills: resultCard[index].iconMedicine,
-                sis: resultCard[index].sis,
-                dis: resultCard[index].dis,
-                puls: resultCard[index].puls,
-                medicine: resultCard[index].medicine,
-              );
-            }),
-          )),
+          child: FutureBuilder(
+              future: context.watch<DatabaseProvider>().openCardHealthBox(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return const Center(child: CupertinoActivityIndicator());
+                } else {
+                  final box = context.read<DatabaseProvider>().box;
+                  if (box.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: box.length,
+                      itemBuilder: (context, index) {
+                        index = box.length - 1 - index;
+                        return ResultCardModel(
+                          smail: box.getAt(index)?.iconStatus.toString() ?? '',
+                          iconDay: box.getAt(index)?.iconDay.toString() ?? '',
+                          sis: box.getAt(index)?.sis.toString() ?? '',
+                          dis: box.getAt(index)?.dis.toString() ?? '',
+                          puls: box.getAt(index)?.puls.toString() ?? '',
+                          medicineText:
+                              box.getAt(index)?.medicineText.toString() ?? '',
+                          date: DateFormat('dd.MM.yyyy')
+                              .format(box.getAt(index)?.date ?? DateTime.now()),
+                          index: index,
+                          hand: box.getAt(index)?.hand.toString() ?? '',
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(child: Text("СПИСОК ПУСТ"));
+                  }
+                }
+              })),
     );
   }
 }

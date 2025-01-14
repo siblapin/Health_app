@@ -24,9 +24,17 @@ class Hand extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          HandBottom(hand: handLeft, nohand: nohandLeft, indicator: 1),
+          HandBottom(
+            hand: handLeft,
+            nohand: nohandLeft,
+            indicatorHand: 1,
+          ),
           const SizedBox(width: 16),
-          HandBottom(hand: handRight, nohand: nohandRight, indicator: 2),
+          HandBottom(
+            hand: handRight,
+            nohand: nohandRight,
+            indicatorHand: 2,
+          ),
         ],
       )
     ]);
@@ -34,12 +42,13 @@ class Hand extends StatelessWidget {
 }
 
 class HandBottom extends StatelessWidget {
-  const HandBottom(
-      {super.key,
-      required this.hand,
-      required this.nohand,
-      required this.indicator});
-  final int indicator;
+  const HandBottom({
+    super.key,
+    required this.hand,
+    required this.nohand,
+    required this.indicatorHand,
+  });
+  final int indicatorHand;
   final String hand;
   final String nohand;
   @override
@@ -47,12 +56,13 @@ class HandBottom extends StatelessWidget {
     final handBotton = context.watch<AddResultsProvider>();
     return GestureDetector(
       onTap: () {
-        handBotton.handBottonFunc(indicator);
+        handBotton.handBottonFunc(indicatorHand);
+        handBotton.indicatorHandIcon();
       },
       child: SizedBox(
         width: 48,
         height: 48,
-        child: (handBotton.handBotton == indicator)
+        child: (handBotton.handBotton == indicatorHand)
             ? SvgPicture.asset(hand, height: 24, width: 24)
             : SvgPicture.asset(nohand, height: 24, width: 24),
       ),

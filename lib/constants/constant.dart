@@ -28,7 +28,7 @@ String nohandRight = 'assets/icons/no_hand_right.svg'; //не активная �
 
 // Icons
 String basket = 'assets/icons/icon24.svg'; // корзина
-String editing = 'assets/icons/vector.svg'; //
+String editing = 'assets/icons/vector.svg'; // редактировать
 String masseng = 'assets/icons/vectorMasseng.svg'; // Вечер
 
-String pill = 'assets/icons/pill.svg';
+String pill = 'assets/icons/pill.svg'; // лекарство 

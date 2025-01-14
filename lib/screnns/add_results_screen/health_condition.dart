@@ -24,18 +24,22 @@ class HealthCondition extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Flexible(
             flex: 1,
-            child: SmBotton(icon: bad, textStatus: 'Плохо', indefecator: 1)),
+            child:
+                SmBotton(iconsmiley: bad, textStatus: 'Плохо', indefecator: 1)),
         Flexible(
             flex: 2,
             child: SmBotton(
-                icon: depression, textStatus: 'Недомагание', indefecator: 2)),
+                iconsmiley: depression,
+                textStatus: 'Недомагание',
+                indefecator: 2)),
         Flexible(
             flex: 1,
-            child: SmBotton(icon: good, textStatus: 'Хорошо', indefecator: 3)),
+            child: SmBotton(
+                iconsmiley: good, textStatus: 'Хорошо', indefecator: 3)),
         Flexible(
             flex: 1,
-            child:
-                SmBotton(icon: happy, textStatus: 'Отлично', indefecator: 4)),
+            child: SmBotton(
+                iconsmiley: happy, textStatus: 'Отлично', indefecator: 4)),
       ])
     ]);
   }
@@ -45,11 +49,11 @@ class HealthCondition extends StatelessWidget {
 class SmBotton extends StatelessWidget {
   const SmBotton(
       {super.key,
-      required this.icon,
+      required this.iconsmiley,
       required this.textStatus,
       required this.indefecator});
 
-  final String icon;
+  final String iconsmiley;
   final String textStatus;
   final int indefecator;
 
@@ -67,12 +71,12 @@ class SmBotton extends StatelessWidget {
             const SizedBox(height: 4),
             (smiley.smileyInt == indefecator)
                 ? SvgPicture.asset(
-                    icon,
+                    iconsmiley,
                     height: 26,
                     width: 26,
                   )
                 : SvgPicture.asset(
-                    icon,
+                    iconsmiley,
                     height: 24,
                     width: 24,
                     colorFilter:
