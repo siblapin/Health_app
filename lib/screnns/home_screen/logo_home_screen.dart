@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/screnns/settings_screen/settings_screen.dart';
 import '../../constants/constant.dart';
 
 class LogoHomeScreen extends StatelessWidget {
@@ -29,9 +30,16 @@ class LogoHomeScreen extends StatelessWidget {
           ),
           Visibility(
             visible: false,
-            child: SizedBox(
-              width: 24,
-              child: Icon(Icons.settings, color: color_100),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SettingScreen()));
+              },
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: Icon(Icons.settings, color: color_100),
+              ),
             ),
           )
         ],

@@ -9,6 +9,7 @@ import 'package:health_app/screnns/add_results_screen/hand.dart';
 import 'package:health_app/screnns/add_results_screen/health_condition.dart';
 import 'package:health_app/screnns/add_results_screen/medicine.dart';
 import 'package:health_app/screnns/add_results_screen/times_of_day.dart';
+import 'package:health_app/screnns/settings_screen/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddBottomSheet extends StatelessWidget {
@@ -16,6 +17,7 @@ class AddBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = context.watch<SettingsProvider>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Padding(
@@ -37,12 +39,18 @@ class AddBottomSheet extends StatelessWidget {
                 const InputOfIndicators(),
                 Expanded(
                   child: ListView(
-                    children: const [
-                      HealthCondition(),
-                      TimesOfDay(),
-                      Hand(),
-                      Medicine(),
-                      ButtonAddResult(),
+                    children: [
+                      Visibility(
+                          visible: settingsProvider.yesNoStatus,
+                          child: const HealthCondition()),
+                      Visibility(
+                          visible: settingsProvider.yesNoDay,
+                          child: const TimesOfDay()),
+                      Visibility(
+                          visible: settingsProvider.yesNoHand,
+                          child: const Hand()),
+                      const Medicine(),
+                      const ButtonAddResult(),
                     ],
                   ),
                 )

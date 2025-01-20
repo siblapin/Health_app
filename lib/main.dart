@@ -12,6 +12,8 @@ import 'providers  /board_home_provider.dart';
 import 'screnns/home_screen.dart';
 import 'package:flutter/services.dart';
 
+import 'screnns/settings_screen/providers/settings_provider.dart';
+
 Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CardHealthAdapter());
@@ -32,7 +34,8 @@ class HealthApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AddResultsProvider()),
         ChangeNotifierProvider(create: (context) => TextDataProvider()),
         ChangeNotifierProvider(create: (context) => BoardHomeProvider()),
-        ChangeNotifierProvider(create: (context) => DatabaseProvider())
+        ChangeNotifierProvider(create: (context) => DatabaseProvider()),
+        ChangeNotifierProvider(create: (context) => SettingsProvider())
       ],
       child: MaterialApp(
           title: 'Дневник давления',
