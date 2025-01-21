@@ -28,42 +28,40 @@ class InputOfIndicators extends StatelessWidget {
             Column(
               children: [
                 Text("ДИС", style: TextStyle(fontSize: 14, color: text_color2)),
-                Text("мм рт. ст.",
-                    style: TextStyle(fontSize: 12, color: color_40)),
                 Container(
                     margin: const EdgeInsets.only(top: 4),
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textSisData,
-                    ))
+                    )),
+                Text("мм рт. ст.",
+                    style: TextStyle(fontSize: 12, color: color_40)),
               ],
             ),
             const SizedBox(width: 32),
-            Column(
-              children: [
-                Text("CИС", style: TextStyle(fontSize: 14, color: text_color2)),
-                Text("мм рт. ст.",
-                    style: TextStyle(fontSize: 12, color: color_40)),
-                Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    width: 60,
-                    child: TextData(
-                      textData: context.watch<TextDataProvider>().textDisData,
-                    ))
-              ],
-            ),
+            Column(children: [
+              Text("CИС", style: TextStyle(fontSize: 14, color: text_color2)),
+              Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  width: 60,
+                  child: TextData(
+                    textData: context.watch<TextDataProvider>().textDisData,
+                  )),
+              Text("мм рт. ст.",
+                  style: TextStyle(fontSize: 12, color: color_40)),
+            ]),
             const SizedBox(width: 32),
             Column(
               children: [
                 Text("ПУЛЬС",
                     style: TextStyle(fontSize: 14, color: text_color2)),
-                Text("уд/мин", style: TextStyle(fontSize: 12, color: color_40)),
                 Container(
                     margin: const EdgeInsets.only(top: 4),
                     width: 60,
                     child: TextData(
                       textData: context.watch<TextDataProvider>().textPulsData,
                     )),
+                Text("уд/мин", style: TextStyle(fontSize: 12, color: color_40))
               ],
             ),
           ],

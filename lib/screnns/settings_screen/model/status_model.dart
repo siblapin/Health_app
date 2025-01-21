@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../../constants/constant.dart';
 import '../providers/settings_provider.dart';
 
 class StatusModel extends StatelessWidget {
-  StatusModel({
+  const StatusModel({
+    required this.icon1,
+    required this.icon2,
+    required this.icon3,
+    required this.icon4,
     required this.nameTitle,
     required this.yesNoStatus,
     required this.indicatorStatus,
     required this.yesNoStatusProvider,
     super.key,
   });
-  String nameTitle;
-  bool yesNoStatus;
-  bool yesNoStatusProvider;
-  int indicatorStatus;
+  final String icon1;
+  final String icon2;
+  final String icon3;
+  final String icon4;
+  final String nameTitle;
+  final bool yesNoStatus;
+  final bool yesNoStatusProvider;
+  final int indicatorStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +43,33 @@ class StatusModel extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(30))),
           child: SizedBox(
-            height: 60,
+            height: 50,
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      margin: const EdgeInsets.all(2),
-                      child: const Center(
-                          child:
-                              Text("иконка", style: TextStyle(fontSize: 18)))),
+                  flex: 1,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SvgPicture.asset(
+                          icon1,
+                          height: 26,
+                          width: 26,
+                        ),
+                        SvgPicture.asset(
+                          icon2,
+                          height: 26,
+                          width: 26,
+                        ),
+                        SvgPicture.asset(
+                          icon3,
+                          height: 26,
+                          width: 26,
+                        ),
+                      ]),
                 ),
                 Expanded(
+                  flex: 1,
                   child: GestureDetector(
                     onTap: () => settingsProvider.yesNoStatusF(
                         yesNoStatus, indicatorStatus),
@@ -73,6 +95,7 @@ class StatusModel extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 1,
                   child: GestureDetector(
                     onTap: () => settingsProvider.yesNoStatusF(
                         yesNoStatus, indicatorStatus),

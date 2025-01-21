@@ -25,25 +25,24 @@ class InputOfIndicatorsSettings extends StatelessWidget {
           decoration: BoxDecoration(
               color: color_100,
               borderRadius: const BorderRadius.all(Radius.circular(30))),
-          child: Padding(
-            padding:
-                const EdgeInsets.only(right: 20, left: 20, top: 5, bottom: 10),
+          child: const Padding(
+            padding: EdgeInsets.only(right: 20, left: 20, top: 5, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InputModel(
                     nameInput: 'ДИС',
-                    counterInput: const InputCounterModel(),
+                    counterInput: InputCounterModel(),
                     nameText: 'мм рт. ст'),
-                const Expanded(child: SizedBox()),
+                Expanded(child: SizedBox()),
                 InputModel(
                     nameInput: 'СИС',
-                    counterInput: const InputCounterModel(),
+                    counterInput: InputCounterModel(),
                     nameText: 'мм рт. ст'),
-                const Expanded(child: SizedBox()),
+                Expanded(child: SizedBox()),
                 InputModel(
                     nameInput: 'ПУЛЬС',
-                    counterInput: const InputCounterModel(),
+                    counterInput: InputCounterModel(),
                     nameText: 'уд/мин'),
               ],
             ),
@@ -55,10 +54,10 @@ class InputOfIndicatorsSettings extends StatelessWidget {
 }
 
 class InputModel extends StatelessWidget {
-  String nameInput;
-  String nameText;
-  Widget counterInput;
-  InputModel({
+  final String nameInput;
+  final String nameText;
+  final Widget counterInput;
+  const InputModel({
     required this.nameInput,
     required this.counterInput,
     required this.nameText,

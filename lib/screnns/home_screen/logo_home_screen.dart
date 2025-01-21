@@ -29,7 +29,7 @@ class LogoHomeScreen extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: false,
+            visible: true,
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(

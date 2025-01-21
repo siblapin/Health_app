@@ -12,7 +12,7 @@ class GenderBottons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settingsProvider = context.watch<SettingsProvider>();
-    bool a = true;
+
     return Column(
       children: [
         SizedBox(
@@ -24,12 +24,12 @@ class GenderBottons extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 60,
+          height: 50,
           child: Row(
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () => settingsProvider.yesNo(a),
+                  onTap: () => settingsProvider.yesNo(),
                   child: (settingsProvider.yesnoGender == true)
                       ? Container(
                           decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class GenderBottons extends StatelessWidget {
               ),
               Expanded(
                 child: GestureDetector(
-                  onTap: () => settingsProvider.yesNo(a),
+                  onTap: () => settingsProvider.yesNo(),
                   child: (settingsProvider.yesnoGender == false)
                       ? Container(
                           margin: const EdgeInsets.all(2),

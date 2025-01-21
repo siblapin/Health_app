@@ -11,7 +11,6 @@ import 'firebase_options.dart';
 import 'providers  /board_home_provider.dart';
 import 'screnns/home_screen.dart';
 import 'package:flutter/services.dart';
-
 import 'screnns/settings_screen/providers/settings_provider.dart';
 
 Future<void> main() async {
