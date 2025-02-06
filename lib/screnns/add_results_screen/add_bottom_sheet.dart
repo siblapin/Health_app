@@ -13,49 +13,49 @@ import 'package:health_app/screnns/settings_screen/providers/settings_provider.d
 import 'package:provider/provider.dart';
 
 class AddBottomSheet extends StatelessWidget {
-  const AddBottomSheet({super.key});
+  AddBottomSheet({super.key, required this.navigarotPop});
+  bool navigarotPop;
 
   @override
   Widget build(BuildContext context) {
     final settingsProvider = context.watch<SettingsProvider>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 41),
-        child: Container(
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 26, right: 26),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 36),
-                  child: Text("Новое измерение",
-                      style: TextStyle(color: color_100, fontSize: 20)),
+      body: Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 26, right: 26),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 36),
+                child: Text("Новое измерение",
+                    style: TextStyle(color: color_100, fontSize: 20)),
+              ),
+              const InputOfIndicators(),
+              Expanded(
+                child: ListView(
+                  children: [
+                    Visibility(
+                        visible: settingsProvider.yesNoStatus,
+                        child: const HealthCondition()),
+                    Visibility(
+                        visible: settingsProvider.yesNoDay,
+                        child: const TimesOfDay()),
+                    Visibility(
+                        visible: settingsProvider.yesNoHand,
+                        child: const Hand()),
+                    const Medicine(),
+                    ButtonAddResult(
+                      navigarotPop: navigarotPop,
+                    ),
+                  ],
                 ),
-                const InputOfIndicators(),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Visibility(
-                          visible: settingsProvider.yesNoStatus,
-                          child: const HealthCondition()),
-                      Visibility(
-                          visible: settingsProvider.yesNoDay,
-                          child: const TimesOfDay()),
-                      Visibility(
-                          visible: settingsProvider.yesNoHand,
-                          child: const Hand()),
-                      const Medicine(),
-                      const ButtonAddResult(),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
@@ -64,9 +64,8 @@ class AddBottomSheet extends StatelessWidget {
 }
 
 class ButtonAddResult extends StatelessWidget {
-  const ButtonAddResult({
-    super.key,
-  });
+  ButtonAddResult({super.key, required this.navigarotPop});
+  bool navigarotPop;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class ButtonAddResult extends StatelessWidget {
 
           // вернуться назад
 
-          Navigator.pop(context);
+          (navigarotPop == true) ? Navigator.pop(context) : null;
         },
         icon: Icon(Icons.add_circle, color: bg),
         label: Text(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../../constants/constant.dart';
 
 class InputOfIndicatorsSettings extends StatelessWidget {
