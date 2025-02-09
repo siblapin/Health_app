@@ -12,12 +12,14 @@ import 'package:health_app/screnns/add_results_screen/times_of_day.dart';
 import 'package:health_app/screnns/settings_screen/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
+//Всплывающие окно с вводом параметром по измерению давления
 class AddBottomSheet extends StatelessWidget {
-  AddBottomSheet({super.key, required this.navigarotPop});
-  bool navigarotPop;
+  const AddBottomSheet({super.key, required this.navigarotPop});
+  final bool navigarotPop;
 
   @override
   Widget build(BuildContext context) {
+    //Provider
     final settingsProvider = context.watch<SettingsProvider>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -63,9 +65,10 @@ class AddBottomSheet extends StatelessWidget {
   }
 }
 
+//Кнопка добавления параметров в лист
 class ButtonAddResult extends StatelessWidget {
-  ButtonAddResult({super.key, required this.navigarotPop});
-  bool navigarotPop;
+  const ButtonAddResult({super.key, required this.navigarotPop});
+  final bool navigarotPop;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +102,7 @@ class ButtonAddResult extends StatelessWidget {
           data.tabBotton = false;
 
           // вернуться назад
-
+          //условия, если формат экрана больше смартфона, то push отключается
           (navigarotPop == true) ? Navigator.pop(context) : null;
         },
         icon: Icon(Icons.add_circle, color: bg),
