@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../constants/constant.dart';
 import 'model/Input_of_Indicators_model.dart';
-import 'model/age_human_model.dart';
-import 'model/gender_model.dart';
 import 'model/status_model.dart';
 import 'providers/settings_provider.dart';
 
@@ -17,7 +15,7 @@ class SettingScreen extends StatelessWidget {
       backgroundColor: bg,
       body: SafeArea(
           child: Container(
-        margin: const EdgeInsets.only(left: 30, right: 30),
+        margin: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
           children: [
             GestureDetector(
@@ -31,19 +29,30 @@ class SettingScreen extends StatelessWidget {
                   child: Text("Назад",
                       style: TextStyle(color: color_100, fontSize: 16)),
                 )),
-            Text("Настройки", style: TextStyle(color: color_100, fontSize: 20)),
+            Container(
+                alignment: AlignmentDirectional.bottomStart,
+                width: double.infinity,
+                child: Text("Настройки",
+                    style: TextStyle(color: color_100, fontSize: 20))),
             Expanded(
               child: SizedBox(
                 width: double.infinity,
                 child: ListView(
                   children: [
                     const SizedBox(height: 20),
-                    const GenderBottons(),
-                    const SizedBox(height: 20),
-                    const Age(),
+                    const OutputSisDisPuls(),
+                    // const GenderBottons(),
+                    const SizedBox(height: 10),
+                    const InfoWidgetsInput(),
                     const SizedBox(height: 20),
                     const InputOfIndicatorsSettings(),
+                    const ButtonUpdateResult(),
                     const SizedBox(height: 20),
+                    Text(
+                      "Настройка информации",
+                      style: TextStyle(color: color_100, fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
                     StatusModel(
                       nameTitle: 'Самочувствие',
                       yesNoStatus: settingsProvider.yesNoStatus,
@@ -77,7 +86,7 @@ class SettingScreen extends StatelessWidget {
                       icon4: '',
                     ),
                     const SizedBox(height: 20),
-                    const ButtonSave(),
+                    // const ButtonSave(),
                   ],
                 ),
               ),
@@ -85,6 +94,93 @@ class SettingScreen extends StatelessWidget {
           ],
         ),
       )),
+    );
+  }
+}
+
+class OutputSisDisPuls extends StatelessWidget {
+  const OutputSisDisPuls({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var inputSisDis = context.watch<SettingsProvider>();
+
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            "Моё давление",
+            style: TextStyle(color: color_100, fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: color_100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                children: [
+                  const Text('Верхнее'),
+                  Text(inputSisDis.infosisSp,
+                      style: TextStyle(color: bg, fontSize: 24))
+                ],
+              )),
+          const SizedBox(height: 5),
+          Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: color_100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                children: [
+                  const Text('Нижнее'),
+                  Text(inputSisDis.infodisSp,
+                      style: TextStyle(color: bg, fontSize: 24))
+                ],
+              )),
+          const SizedBox(height: 5),
+          Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: color_100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                children: [
+                  const Text('Пульс'),
+                  Text(inputSisDis.infopulsSp,
+                      style: TextStyle(color: bg, fontSize: 24))
+                ],
+              )),
+          const SizedBox(height: 10),
+          Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: color_100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                children: [
+                  const Text('Возраст'),
+                  Text(inputSisDis.infoageSp,
+                      style: TextStyle(color: bg, fontSize: 24))
+                ],
+              )),
+        ]),
+        const SizedBox(height: 15),
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            "Нормы давления",
+            style: TextStyle(color: color_100, fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -108,5 +204,121 @@ class ButtonSave extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ButtonUpdateResult extends StatelessWidget {
+  const ButtonUpdateResult({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var inputSisDis = context.read<SettingsProvider>();
+    return SizedBox(
+      width: 100,
+      child: ElevatedButton.icon(
+        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color_100)),
+        onPressed: () {
+          inputSisDis.updateSisDisPuls();
+          (inputSisDis.disInput.text.isNotEmpty) ? inputSisDis.imputDis() : 0;
+          (inputSisDis.sisInput.text.isNotEmpty) ? inputSisDis.imputSis() : 0;
+          (inputSisDis.ageInput.text.isNotEmpty) ? inputSisDis.impuAge() : 0;
+          inputSisDis.saveData();
+        },
+        label: Text(
+          "Сохранить моё давление",
+          style: TextStyle(color: bg, fontSize: 18),
+        ),
+      ),
+    );
+  }
+}
+
+class InfoWidgetsInput extends StatelessWidget {
+  const InfoWidgetsInput({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var inputSisDis = context.watch<SettingsProvider>();
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: color_100,
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
+          child: Column(
+            children: [
+              Text('Норма давления при вашем возрасте',
+                  style: TextStyle(color: bg, fontSize: 14), softWrap: true),
+              Text(inputSisDis.infoAge,
+                  style: TextStyle(color: Colors.green[300], fontSize: 24)),
+              Text(
+                  '*показатели могут отличаться от вашего нормального давления',
+                  style: TextStyle(color: color_40, fontSize: 10),
+                  softWrap: true),
+            ],
+          )),
+      const SizedBox(height: 10),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: color_100,
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              children: [
+                Text('ВЕРХНЕЕ (SIS)',
+                    softWrap: true,
+                    style: TextStyle(
+                        color: (inputSisDis.infoTestSIS == 'понижено')
+                            ? Colors.orange[300]
+                            : (inputSisDis.infoTestSIS == 'норма')
+                                ? Colors.green[300]
+                                : (inputSisDis.infoTestSIS == 'повышено')
+                                    ? Colors.red[300]
+                                    : Colors.white)),
+                Text(inputSisDis.infoTestSIS,
+                    style: TextStyle(color: bg, fontSize: 14))
+              ],
+            )),
+        const SizedBox(height: 10),
+        Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: color_100,
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              children: [
+                Text('НИЖНЕЕ (DIS)',
+                    softWrap: true,
+                    style: TextStyle(
+                        color: (inputSisDis.infoTestDIS == 'понижено')
+                            ? Colors.orange[300]
+                            : (inputSisDis.infoTestDIS == 'норма')
+                                ? Colors.green[300]
+                                : (inputSisDis.infoTestDIS == 'повышено')
+                                    ? Colors.red[300]
+                                    : Colors.white)),
+                Text(inputSisDis.infoTestDIS,
+                    style: TextStyle(color: bg, fontSize: 14))
+              ],
+            )),
+        const SizedBox(height: 10),
+        Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: color_100,
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              children: [
+                Text('ПУЛЬС', style: TextStyle(color: Colors.red[300])),
+                Text(inputSisDis.pulseInput.text,
+                    style: TextStyle(color: bg, fontSize: 14))
+              ],
+            )),
+      ]),
+    ]);
   }
 }

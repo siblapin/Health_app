@@ -44,6 +44,7 @@ class BoardHomeScreen extends StatelessWidget {
                               height: 20,
                               width: double.infinity,
                               child: Text("Последнее измерение",
+                                  softWrap: true,
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       fontSize: 16, color: color_100)),
@@ -118,7 +119,7 @@ class BoardHomeScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SisDisPuls(
-                                    textTitle: "СИС",
+                                    textTitle: "ВЕРХНЕЕ",
                                     inputText: (box.isNotEmpty)
                                         ? box
                                                 .getAt(box.length - 1)
@@ -129,7 +130,7 @@ class BoardHomeScreen extends StatelessWidget {
                                     text: 'мм рт.ст',
                                   ),
                                   SisDisPuls(
-                                    textTitle: 'ДИС',
+                                    textTitle: 'НИЖНЕЕ',
                                     inputText: (box.isNotEmpty)
                                         ? box
                                                 .getAt(box.length - 1)
@@ -193,12 +194,12 @@ class BoardHomeScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SisDisPuls(
-                                    textTitle: "СИС",
+                                    textTitle: "ВЕРХНЕЕ",
                                     inputText: '110',
                                     text: 'мм рт.ст',
                                   ),
                                   SisDisPuls(
-                                    textTitle: 'ДИС',
+                                    textTitle: 'НИЖНЕЕ',
                                     inputText: '100',
                                     text: 'мм рт.ст',
                                   ),

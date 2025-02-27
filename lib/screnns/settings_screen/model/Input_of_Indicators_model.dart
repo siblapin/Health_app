@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:health_app/screnns/settings_screen/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../constants/constant.dart';
 
 class InputOfIndicatorsSettings extends StatelessWidget {
@@ -9,40 +11,48 @@ class InputOfIndicatorsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var inputSisDis = context.read<SettingsProvider>();
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            "Ваше нормальное давление",
-            style: TextStyle(color: color_100, fontSize: 16),
-            textAlign: TextAlign.start,
-          ),
-        ),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
               color: color_100,
               borderRadius: const BorderRadius.all(Radius.circular(30))),
-          child: const Padding(
-            padding: EdgeInsets.only(right: 20, left: 20, top: 5, bottom: 10),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(right: 15, left: 15, top: 5, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InputModel(
-                    nameInput: 'ДИС',
-                    counterInput: InputCounterModel(),
+                    nameInput: 'Верхнее',
+                    counterInput: InputCounterModel(
+                      inputSisDis: inputSisDis.sisInput,
+                      quantity: 3,
+                    ),
                     nameText: 'мм рт. ст'),
-                Expanded(child: SizedBox()),
                 InputModel(
-                    nameInput: 'СИС',
-                    counterInput: InputCounterModel(),
+                    nameInput: 'Нижнее',
+                    counterInput: InputCounterModel(
+                      inputSisDis: inputSisDis.disInput,
+                      quantity: 3,
+                    ),
                     nameText: 'мм рт. ст'),
-                Expanded(child: SizedBox()),
                 InputModel(
-                    nameInput: 'ПУЛЬС',
-                    counterInput: InputCounterModel(),
+                    nameInput: 'Пульс',
+                    counterInput: InputCounterModel(
+                      inputSisDis: inputSisDis.pulseInput,
+                      quantity: 3,
+                    ),
                     nameText: 'уд/мин'),
+                InputModel(
+                    nameInput: 'Возраст',
+                    counterInput: InputCounterModel(
+                      inputSisDis: inputSisDis.ageInput,
+                      quantity: 2,
+                    ),
+                    nameText: 'полных лет'),
               ],
             ),
           ),
@@ -56,6 +66,7 @@ class InputModel extends StatelessWidget {
   final String nameInput;
   final String nameText;
   final Widget counterInput;
+
   const InputModel({
     required this.nameInput,
     required this.counterInput,
@@ -79,21 +90,29 @@ class InputModel extends StatelessWidget {
 }
 
 class InputCounterModel extends StatelessWidget {
-  const InputCounterModel({super.key});
+  const InputCounterModel(
+      {super.key, required this.inputSisDis, required this.quantity});
+  final TextEditingController inputSisDis;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
-    var ageText = TextEditingController();
+    var textnext = FocusScope.of(context);
     return SizedBox(
       width: 70,
       child: TextField(
-        inputFormatters: [LengthLimitingTextInputFormatter(3)],
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(quantity),
+          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+        ],
         keyboardType: TextInputType.number,
         cursorColor: color_100,
         onChanged: (text) {
-          if (text.length == 3) {}
+          if (text.length == 3) {
+            textnext.nextFocus();
+          }
         },
-        controller: ageText,
+        controller: inputSisDis,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

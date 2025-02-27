@@ -130,12 +130,12 @@ class _ResultCardModelState extends State<ResultCardModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SisDisPuls(
-                    textTitle: "СИС",
+                    textTitle: "ВЕРХНЕЕ",
                     inputText: widget.sis.toString(),
                     text: 'мм рт.ст',
                   ),
                   SisDisPuls(
-                    textTitle: "ДИС",
+                    textTitle: "НИЖНЕЕ",
                     inputText: widget.dis.toString(),
                     text: 'мм рт.ст',
                   ),

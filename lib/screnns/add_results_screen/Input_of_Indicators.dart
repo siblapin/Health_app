@@ -27,7 +27,8 @@ class InputOfIndicators extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text("ДИС", style: TextStyle(fontSize: 14, color: text_color2)),
+                Text("ВЕРХНЕЕ",
+                    style: TextStyle(fontSize: 14, color: text_color2)),
                 Container(
                     margin: const EdgeInsets.only(top: 4),
                     width: 60,
@@ -40,7 +41,8 @@ class InputOfIndicators extends StatelessWidget {
             ),
             const SizedBox(width: 32),
             Column(children: [
-              Text("CИС", style: TextStyle(fontSize: 14, color: text_color2)),
+              Text("НИЖНЕЕ",
+                  style: TextStyle(fontSize: 14, color: text_color2)),
               Container(
                   margin: const EdgeInsets.only(top: 4),
                   width: 60,
@@ -78,7 +80,10 @@ class TextData extends StatelessWidget {
   Widget build(BuildContext context) {
     var textnext = FocusScope.of(context);
     return TextField(
-      inputFormatters: [LengthLimitingTextInputFormatter(3)],
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(3),
+        FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+      ],
       keyboardType: TextInputType.number,
       cursorColor: color_100,
       onChanged: (text) {

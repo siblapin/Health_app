@@ -19,7 +19,7 @@ class ButtonAddHomeScreen extends StatelessWidget {
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
             context: context,
-            builder: (BuildContext context) => AddBottomSheet(
+            builder: (BuildContext context) => const AddBottomSheet(
               navigarotPop: true,
             ),
           );
